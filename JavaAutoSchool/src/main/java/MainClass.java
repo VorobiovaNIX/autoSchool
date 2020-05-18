@@ -159,11 +159,11 @@ public class MainClass {
         int[] firstSmallArray = new int[10];
         int[] secondSmallArray = new int[10];
 
-        for (int i = 0; i < firstSmallArray.length; i++) {
+        for (int i = 0; i < largeArray.length / 2; i++) {
             firstSmallArray[i] = largeArray[i];
         }
 
-        for (int i = 0, j = 0; i < secondSmallArray.length; i++, j++) {
+        for (int i = largeArray.length / 2, j = 0; i < largeArray.length; i++, j++) {
             secondSmallArray[j] = largeArray[i];
         }
 
