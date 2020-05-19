@@ -18,7 +18,7 @@ public class MainClass {
     Создайте программу, вычисляющую и выводящую на экран сумму цифр числа n */
     private static void sumNumber(int num) {
         if (num > 9 && num < 100) {
-            int firstNumber = (num / 10);
+            int firstNumber = num / 10;
             int secondNumber = num % 10;
             int result = firstNumber + secondNumber;
 
