@@ -130,14 +130,14 @@ public class MainClass {
 
         while (attemptNum <= 7) {
             int enteredNumber = Integer.parseInt(reader.readLine());
-            if (enteredNumber == numberToGuess) {
-                solved = true;
-                break;
-            }
+
+            solved = enteredNumber == numberToGuess;
+            if (solved) break;
             attemptNum++;
 
             if (enteredNumber < numberToGuess) System.out.println("Мало");
             else System.out.println("Много");
+
         }
 
         if (solved) System.out.println(" Угадал :) количетсво попыток " + attemptNum);
