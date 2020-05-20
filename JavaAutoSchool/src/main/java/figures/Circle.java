@@ -1,28 +1,21 @@
 package figures;
 
 public class Circle extends Shape {
-    private String name;
+
     private double radius;
 
-    Circle(String name, int radius) {
-        this.name = name;
+    public Circle(String name, double radius) {
+        super(name);
         this.radius = radius;
     }
 
-    public Circle(double radius) {
+    public Circle(String name, int radius) {
+        super(name);
         this.radius = radius;
     }
 
     @Override
     double calculateArea() {
         return Math.PI * Math.sqrt(radius);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
