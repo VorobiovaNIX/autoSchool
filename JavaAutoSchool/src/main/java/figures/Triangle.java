@@ -3,13 +3,11 @@ package figures;
 public class Triangle extends Shape {
 
     private String name;
-    private Point coordinates;
     private double oneSideOfTriangle; // одна сторона
     private double secondSideOfTriangle; //вторая сторона
     private double angleBetweenSides; //угол между сторонами
 
-    Triangle(int x, int y, double oneSideOfTriangle, double secondSideOfTriangle, double angleBetweenSides) {
-        this.coordinates = new Point(x, y);
+    public Triangle(double oneSideOfTriangle, double secondSideOfTriangle, double angleBetweenSides) {
         this.oneSideOfTriangle = oneSideOfTriangle;
         this.secondSideOfTriangle = secondSideOfTriangle;
         this.angleBetweenSides = angleBetweenSides;
@@ -20,10 +18,6 @@ public class Triangle extends Shape {
         return (oneSideOfTriangle*secondSideOfTriangle*Math.sin(angleBetweenSides))/2;
     }
 
-    @Override
-    Point getCoordinates() {
-        return coordinates;
-    }
 
     public String getName() {
         return name;
