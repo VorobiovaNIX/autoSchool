@@ -15,13 +15,12 @@ public class Triangle extends Shape {
 
     @Override
     double calculateArea() {
-        return (oneSideOfTriangle * secondSideOfTriangle * Math.sin(angleBetweenSides)) / 2;
+        return (oneSideOfTriangle * secondSideOfTriangle * Math.sin(Math.toRadians(angleBetweenSides))) / 2;
     }
 
     public void setAngleBetweenSides(double angleBetweenSides) {
-        if (angleBetweenSides <180&& angleBetweenSides>0) this.angleBetweenSides = angleBetweenSides;
+        if (angleBetweenSides < 90 && angleBetweenSides > 0) this.angleBetweenSides = angleBetweenSides;
         else System.out.println("The angle between sides of the triangle cannot be more than 180 and less than 1");
     }
-
 
 }
