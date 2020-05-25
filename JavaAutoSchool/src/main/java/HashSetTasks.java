@@ -28,13 +28,12 @@ public class HashSetTasks {
                 "куст", "жень-шень", "корень", "земляника", "ягода", "ирис",
                 "цветок", "картофель", "клубень"));
 
-        Iterator<Map.Entry<String, String>> iterator3 = hashMap.entrySet().iterator();
-        while (iterator3.hasNext()) {
-            //получение «пары» элементов
-            Map.Entry<String, String> pair = iterator3.next();
-            String key = pair.getKey(); //ключ
-            String value = pair.getValue(); //значение
-            System.out.println(key + " - " + value);
+        Iterator<Map.Entry<String, String>> iterator = hashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> pair = iterator.next();
+            String key = pair.getKey();
+            String value = pair.getValue();
+            System.out.println(String.format("%s - %s", key, value));
         }
     }
 
@@ -51,8 +50,8 @@ public class HashSetTasks {
         }
 
         for (Map.Entry<String, Cat> pair : catHashMap.entrySet()) {
-            String key = pair.getKey(); //ключ
-            Cat value = pair.getValue(); //значение
+            String key = pair.getKey();
+            Cat value = pair.getValue();
             System.out.println(String.format("%s : %s", key, value));
         }
     }
@@ -70,10 +69,9 @@ public class HashSetTasks {
             hashMap.put(key, value);
         }
 
-        for (Map.Entry<String, String> pair : hashMap.entrySet()) {
-            System.out.println(pair.getKey());
+        for (String key : hashMap.keySet()) {
+            System.out.println(key);
         }
-
     }
 
     /* 5. Вывести на экран список значений
@@ -87,8 +85,8 @@ public class HashSetTasks {
             hashMap.put(key, value);
         }
 
-        for (Map.Entry<String, String> pair : hashMap.entrySet()) {
-            System.out.println(pair.getValue());
+        for (String value : hashMap.values()) {
+            System.out.println(value);
         }
     }
 
@@ -98,7 +96,7 @@ public class HashSetTasks {
 
     public static void printHashMapWithObject() {
 
-        Map<String, Object> hashMap = new HashMap<>();
+        Map<String, Object> hashMap = new LinkedHashMap<>();
 
         for (int i = 1; i <= 10; i++) {
             String key = "Key for object " + i;
