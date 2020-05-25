@@ -41,7 +41,7 @@ public class SetAndMapTasks {
             System.out.println(key + " : " + value);
         }
 
-        Map<String, Integer> namesCount = new LinkedHashMap<>();
+        Map<String, Integer> namesCount = new HashMap<>();
         for (String name : mapForNameAndSurname.values()) {
             if (namesCount.containsKey(name)) namesCount.put(name, namesCount.get(name) + 1);
             else namesCount.put(name, 1);
@@ -94,7 +94,7 @@ public class SetAndMapTasks {
             mapNameAndSurname.put("Cидоров" + i, "Иван");
         }
 
-        Map<String, String> mapWhereDeleteTheSameValues = new LinkedHashMap<>();
+        Map<String, String> mapWhereDeleteTheSameValues = new HashMap<>();
 
         for (Map.Entry<String, String> pair : mapNameAndSurname.entrySet()) {
             String key = pair.getKey();

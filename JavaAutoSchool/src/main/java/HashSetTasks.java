@@ -96,7 +96,7 @@ public class HashSetTasks {
 
     public static void printHashMapWithObject() {
 
-        Map<String, Object> hashMap = new LinkedHashMap<>();
+        Map<String, Object> hashMap = new HashMap<>();
 
         for (int i = 1; i <= 10; i++) {
             String key = "Key for object " + i;
