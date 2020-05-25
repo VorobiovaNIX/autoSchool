@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 public class SetAndMapTasks {
@@ -64,25 +65,20 @@ public class SetAndMapTasks {
         }
 
         System.out.println("The dictionary 'Surname' : 'Date Of Birthday' is: ");
-        for (Map.Entry<String, LocalDate> pair : mapForSurnameAndDOB.entrySet()) {
+
+        Iterator<Map.Entry<String, LocalDate>> iterator = mapForSurnameAndDOB.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, LocalDate> pair = iterator.next();
             String key = pair.getKey();
             LocalDate value = pair.getValue();
             System.out.println(String.format("%s : %s", key, value));
-        }
-
-        Map<String, LocalDate> peopleThatBornNotSummer = new LinkedHashMap<>();
-        LocalDate firstJun = LocalDate.parse("1993-06-01");
-        LocalDate firstSep = LocalDate.parse("1993-09-01");
-
-        for (Map.Entry<String, LocalDate> pair : mapForSurnameAndDOB.entrySet()) {
-            String key = pair.getKey();
-            LocalDate value = pair.getValue();
-            if (value.isAfter(firstJun) && value.isBefore(firstSep)) peopleThatBornNotSummer.remove(key);
-            else peopleThatBornNotSummer.put(key, value);
+            if (value.getMonth() == Month.JUNE || value.getMonth() == Month.JULY || value.getMonth() == Month.AUGUST) {
+                iterator.remove();
+            }
         }
 
         System.out.println("People that not born in summer");
-        for (Map.Entry<String, LocalDate> pair : peopleThatBornNotSummer.entrySet()) {
+        for (Map.Entry<String, LocalDate> pair : mapForSurnameAndDOB.entrySet()) {
             String key = pair.getKey();
             LocalDate value = pair.getValue();
             System.out.println(String.format("%s : %s", key, value));
