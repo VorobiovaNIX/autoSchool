@@ -4,6 +4,8 @@ import java.util.*;
 
 public class SetAndMapTasks {
 
+    static final List<Month> SUMMER_MONTHS = new ArrayList<>(Arrays.asList(Month.JUNE, Month.JULY, Month.AUGUST));
+
     /*  12. Создать множество строк (Set<String>), занести в него 20 слов на букву «Л» */
     static void createSetOn20Words() {
         Set<String> stringSet = new HashSet<>();
@@ -65,24 +67,12 @@ public class SetAndMapTasks {
         }
 
         System.out.println("The dictionary 'Surname' : 'Date Of Birthday' is: ");
-
-        Iterator<Map.Entry<String, LocalDate>> iterator = mapForSurnameAndDOB.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, LocalDate> pair = iterator.next();
-            String key = pair.getKey();
-            LocalDate value = pair.getValue();
-            System.out.println(String.format("%s : %s", key, value));
-            if (value.getMonth() == Month.JUNE || value.getMonth() == Month.JULY || value.getMonth() == Month.AUGUST) {
-                iterator.remove();
-            }
-        }
+        mapForSurnameAndDOB.entrySet().forEach(System.out::println);
 
         System.out.println("People that not born in summer");
-        for (Map.Entry<String, LocalDate> pair : mapForSurnameAndDOB.entrySet()) {
-            String key = pair.getKey();
-            LocalDate value = pair.getValue();
-            System.out.println(String.format("%s : %s", key, value));
-        }
+        mapForSurnameAndDOB.entrySet().stream()
+                .filter(v -> !SUMMER_MONTHS.contains(v.getValue().getMonth()))
+                .forEach(System.out::println);
     }
 
     /* 16. Создать словарь (Map<String, String>) занести в него десять записей по принципу «фамилия» - «имя».
