@@ -1,22 +1,23 @@
 import java.lang.reflect.Field;
+import java.util.stream.Stream;
 
 public class Car {
 
     public static void printValueAndNameOfFieldsOfChildClass(Car car) {
 
-        try {
-            Field[] fields = car.getClass().getDeclaredFields();
+        Field[] fields = car.getClass().getDeclaredFields();
+        String nameOfClass = car.getClass().getName();
+        System.out.println(String.format("%s specs:", nameOfClass));
 
-            for (Field value : fields) {
-                value.setAccessible(true);
-                String nameOfField = value.getName();
-                String field = (String) value.get(car);
-                String nameOfClass = car.getClass().getName();
-
-                System.out.println(String.format("The %s is: %s : %s", nameOfClass, nameOfField, field));
+        Stream.of(fields).forEach(field -> {
+            field.setAccessible(true);
+            try {
+                String name = field.getName();
+                String value = (String) field.get(car);
+                System.out.println(String.format("  -%s : %s", name, value));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        });
     }
 }

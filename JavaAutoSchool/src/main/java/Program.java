@@ -8,10 +8,8 @@ public class Program {
         Random random = new Random();
 
         Field[] fields = object.getClass().getDeclaredFields();
-        // FIXME: rewrite using stream API
 
         try {
-            //Object object = new Object();
             for (int i = 0; i < fields.length; i++) {
                 fields[i].setAccessible(true);
 
@@ -21,18 +19,17 @@ public class Program {
                         fields[i].set(object, model);
                         break;
                     case 1:
-                        String[] arr = {"white", "black", "yellow", "red", "silver"};
-                        int randomNumber = random.nextInt(arr.length);
-                        fields[i].set(object, arr[randomNumber]);
+                        String[] colors = {"white", "black", "yellow", "red", "silver"};
+                        fields[i].set(object, colors[random.nextInt(colors.length)]);
                         break;
                     case 2:
-                        fields[i].set(object, "sedan");
+                        String[] bodyTypes = {"sedan", "crossover", "hatchback", "roofless"};
+                        fields[i].set(object, bodyTypes[random.nextInt(bodyTypes.length)]);
                         break;
                 }
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
     }
 }
