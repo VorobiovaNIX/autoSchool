@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class WebElementIsPresent extends TypeSafeMatcher<WebElement> {
 
+
     @Override
     protected boolean matchesSafely(WebElement webElement) {
         try {
@@ -15,8 +16,16 @@ public class WebElementIsPresent extends TypeSafeMatcher<WebElement> {
         }
     }
 
+    @Override
+    protected void describeMismatchSafely(WebElement webElement, Description mismatchDescription) {
+        mismatchDescription
+                .appendText("Expected: ")
+                .appendValue(true)
+                .appendText(" - instead got: ")
+                .appendValue(webElement.isDisplayed());
+    }
 
-    public static Matcher<WebElement> isAWebElement() {
+    public static Matcher<WebElement> isDisplayed() {
         return new WebElementIsPresent();
     }
 

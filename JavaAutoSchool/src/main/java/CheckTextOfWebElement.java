@@ -6,37 +6,34 @@ import org.openqa.selenium.WebElement;
 
 public class CheckTextOfWebElement extends TypeSafeMatcher<WebElement> {
 
-    private String matchText;
-    private boolean strictComparison;
+    private Matcher<String> matchText;
 
-    public CheckTextOfWebElement(String matchText, boolean strictComparison) {
+    public CheckTextOfWebElement(Matcher<String> matchText) {
         this.matchText = matchText;
-        this.strictComparison = strictComparison;
     }
 
     @Override
     protected boolean matchesSafely(WebElement webElement) {
         try {
+            String text = webElement.getText();
 
-            String text = webElement.getText().isEmpty() ?
-                    webElement.getAttribute("value") :
-                    webElement.getText();
-
-            return strictComparison ?
-                    text.equals(matchText) :
-                    text.contains(matchText);
-
+            return matchText.matches(text);
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
-    public static Matcher<WebElement> checkText(String matchText) {
-        return new CheckTextOfWebElement(matchText, true);
+    public static Matcher<WebElement> hasText(Matcher<String> matcher) {
+        return new CheckTextOfWebElement(matcher);
     }
 
-    public static Matcher<WebElement> hasText(String matchText) {
-        return new CheckTextOfWebElement(matchText, false);
+    @Override
+    protected void describeMismatchSafely(WebElement webElement, Description mismatchDescription) {
+        mismatchDescription
+                .appendText("Expected: ")
+                .appendValue(matchText)
+                .appendValue(" - instead got: ")
+                .appendText(webElement.getText());
     }
 
     @Override

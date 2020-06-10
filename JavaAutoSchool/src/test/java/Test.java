@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 
 public class Test {
 
@@ -17,7 +19,8 @@ public class Test {
 
     @BeforeClass
     public static void startDriver() {
-        System.setProperty("webdriver.chrome.driver", "/Users/mabookair/nixsolutions/autoSchool/JavaAutoSchool/src/test/resources/drivers/chromedriver-3");
+        System.setProperty("webdriver.chrome.driver", "/Users/mabookair/nixsolutions/autoSchool/JavaAutoSchool/src" +
+                "/test/resources/drivers/chromedriver-3");
 
         driver = new ChromeDriver();
         driver.get("https://www.google.com/");
@@ -28,16 +31,15 @@ public class Test {
     @org.junit.Test
     public void checkThatWebElementIsPresented() {
         WebElement logo = driver.findElement(By.cssSelector("#hplogo")); //Google logo
-        assertThat(logo, WebElementIsPresent.isAWebElement());
+        assertThat(logo, WebElementIsPresent.isDisplayed());
     }
 
     @org.junit.Test
     public void checkThatTextOfWebElementMatch() {
         WebElement searchButton = driver.findElement(By.className("gNO89b")); //search button
 
-        assertThat(searchButton, CheckTextOfWebElement.checkText("Пошук Google"));
-        assertThat(searchButton, CheckTextOfWebElement.hasText("Пошук"));
-
+        assertThat(searchButton, CheckTextOfWebElement.hasText(equalTo( "Пошук Google")));
+        assertThat(searchButton, CheckTextOfWebElement.hasText(containsString("Пошук")));
     }
 
     @AfterClass
