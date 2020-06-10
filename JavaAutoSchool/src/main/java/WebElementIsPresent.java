@@ -11,7 +11,7 @@ public class WebElementIsPresent extends TypeSafeMatcher<WebElement> {
         try {
             return webElement.isDisplayed();
         } catch (NoSuchElementException e) {
-            return !webElement.isDisplayed();
+            return false;
         }
     }
 

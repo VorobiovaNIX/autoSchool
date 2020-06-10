@@ -7,23 +7,36 @@ import org.openqa.selenium.WebElement;
 public class CheckTextOfWebElement extends TypeSafeMatcher<WebElement> {
 
     private String matchText;
+    private boolean strictComparison;
 
-    public CheckTextOfWebElement(String matchText) {
+    public CheckTextOfWebElement(String matchText, boolean strictComparison) {
         this.matchText = matchText;
+        this.strictComparison = strictComparison;
     }
 
     @Override
     protected boolean matchesSafely(WebElement webElement) {
         try {
-            System.out.println(webElement.getAttribute("value"));
-            return webElement.getAttribute("value").equals(matchText);
+
+            String text = webElement.getText().isEmpty() ?
+                    webElement.getAttribute("value") :
+                    webElement.getText();
+
+            return strictComparison ?
+                    text.equals(matchText) :
+                    text.contains(matchText);
+
         } catch (NoSuchElementException e) {
             return false;
         }
     }
 
     public static Matcher<WebElement> checkText(String matchText) {
-        return new CheckTextOfWebElement(matchText);
+        return new CheckTextOfWebElement(matchText, true);
+    }
+
+    public static Matcher<WebElement> hasText(String matchText) {
+        return new CheckTextOfWebElement(matchText, false);
     }
 
     @Override

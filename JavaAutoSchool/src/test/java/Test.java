@@ -19,9 +19,6 @@ public class Test {
     public static void startDriver() {
         System.setProperty("webdriver.chrome.driver", "/Users/mabookair/nixsolutions/autoSchool/JavaAutoSchool/src/test/resources/drivers/chromedriver-3");
 
-        //System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver-3");
-
-
         driver = new ChromeDriver();
         driver.get("https://www.google.com/");
         driver.manage().window().maximize();
@@ -37,7 +34,10 @@ public class Test {
     @org.junit.Test
     public void checkThatTextOfWebElementMatch() {
         WebElement searchButton = driver.findElement(By.className("gNO89b")); //search button
+
         assertThat(searchButton, CheckTextOfWebElement.checkText("Пошук Google"));
+        assertThat(searchButton, CheckTextOfWebElement.hasText("Пошук"));
+
     }
 
     @AfterClass
