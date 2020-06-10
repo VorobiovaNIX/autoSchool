@@ -32,7 +32,8 @@ public class LocatorsTest {
 
         driver.findElement(By.xpath("//button[@name='submit_search']")); // search icon
 
-        driver.findElement(By.xpath("//li[2]/a[text()='Dresses']")); // Dresses catalog in top menu //li[2]/a[@class='sf-with-ul'][text()='Dresses']
+        /*  Dresses catalog in top menu OR //div[@id='block_top_menu']/ul/li[2]/a[text()='Dresses']  */
+        driver.findElement(By.xpath("//div[@id='block_top_menu']/ul/li[2]/a"));
 
 
         /*open the page of search result */
