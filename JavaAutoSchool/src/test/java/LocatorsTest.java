@@ -1,7 +1,10 @@
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -27,25 +30,32 @@ public class LocatorsTest {
 
         driver.findElement(By.xpath("//a[@class='login']")); //sign in button
 
-        driver.findElement(By.xpath("//*[@id=\"searchbox\"]/button")); // search icon
+        driver.findElement(By.xpath("//button[@name='submit_search']")); // search icon
 
-        driver.findElement(By.xpath("//*[@id=\"block_top_menu\"]/ul/li[2]/a")); // Dresses catalog in top menu
+        driver.findElement(By.xpath("//li[2]/a[text()='Dresses']")); // Dresses catalog in top menu //li[2]/a[@class='sf-with-ul'][text()='Dresses']
 
-        driver.findElement(By.id("search_query_top")).sendKeys("SUMMER" + Keys.ENTER); // open page of search result
 
-        driver.findElement(By.xpath("//*[@id=\"center_column\"]/h1")); // 'SEARCH  "SUMMER"' header on search result page
+        /*open the page of search result */
+        driver.findElement(By.xpath("//input[@id='search_query_top']")).sendKeys("SUMMER" + Keys.ENTER);
 
-        driver.findElement(By.xpath("//*[@id=\"selectProductSort\"]")).click(); // click on "Sort by" drop-down menu
-        driver.findElement(By.xpath("//*[@id=\"selectProductSort\"]/option[5]")).click(); // 'Product Name: Z to A' option
+        /* 'SEARCH  "SUMMER"' header on search result page OR //h1[@class='page-heading  product-listing']    */
+        driver.findElement(By.xpath("//h1[contains(@class,'product-listing')]"));
+
+        driver.findElement(By.xpath("//select[@id='selectProductSort']")).click(); // click on "Sort by" drop-down menu
+
+        /* 'Product Name: Z to A' option OR //select[@id='selectProductSort']/option[5] */
+        driver.findElement(By.xpath("//option[contains(text(),'Product Name: Z to A')]")).click();
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,500)", "");
 
-        driver.findElement(By.xpath("//*[@id=\"list\"]/a/i")); // icon that convert products to list
+        driver.findElement(By.xpath("//li[@id='list']")); // icon that convert grid of products to list of products
+
 
         /* "Add to cart" button on product  */
-        driver.findElement(By.xpath("//li[contains(@class,'block_produc')][2]//span[text()='Add to cart']"));
+        driver.findElement(By.xpath("//li[contains(@class,'block_product')][2]//span[text()='Add to cart']"));
+
 
     }
 
