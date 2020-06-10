@@ -4,6 +4,8 @@ import org.hamcrest.TypeSafeMatcher;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
+import static org.hamcrest.Matchers.equalTo;
+
 public class CheckTextOfWebElement extends TypeSafeMatcher<WebElement> {
 
     private Matcher<String> matchText;
@@ -21,6 +23,10 @@ public class CheckTextOfWebElement extends TypeSafeMatcher<WebElement> {
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    public static CheckTextOfWebElement checkText(String matcher) {
+        return (CheckTextOfWebElement) hasText(equalTo(matcher));
     }
 
     public static Matcher<WebElement> hasText(Matcher<String> matcher) {

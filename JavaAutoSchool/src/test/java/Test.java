@@ -38,8 +38,11 @@ public class Test {
     public void checkThatTextOfWebElementMatch() {
         WebElement searchButton = driver.findElement(By.className("gNO89b")); //search button
 
-        assertThat(searchButton, CheckTextOfWebElement.hasText(equalTo( "Пошук Google")));
+        assertThat(searchButton, CheckTextOfWebElement.hasText(equalTo("Пошук Google")));
         assertThat(searchButton, CheckTextOfWebElement.hasText(containsString("Пошук")));
+
+        assertThat(searchButton, CheckTextOfWebElement.checkText("Пошук Google"));
+
     }
 
     @AfterClass
