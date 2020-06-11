@@ -26,7 +26,7 @@ public class CheckTextOfWebElement extends TypeSafeMatcher<WebElement> {
     }
 
     public static CheckTextOfWebElement checkText(String matcher) {
-        return (CheckTextOfWebElement) hasText(equalTo(matcher));
+        return new CheckTextOfWebElement(equalTo(matcher));
     }
 
     public static Matcher<WebElement> hasText(Matcher<String> matcher) {
