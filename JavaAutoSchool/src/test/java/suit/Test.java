@@ -70,11 +70,10 @@ public class Test {
         ArrayList<Double> prices = new ArrayList<>();
         for (WebElement webElement : listOfProduct) {
             double price = Double.parseDouble(webElement
-                    .findElement(By.xpath(".//div/div[2]/div[1]/span[@class='old-price product-price'] | .//div/div[2]/div[1]/span[@itemprop='price']")).getText().substring(1));
-            //    .findElement(By.xpath(".//div/div[2]/div[1]/span[@class='old-price product-price' or @itemprop='price'] ")).getText().substring(1));
-
+                    .findElement(By.xpath(".//div[@class='right-block']/*[contains(@class, 'content_price') and " +
+                            "not(*[contains(@class, 'old-price')])] | .//div[@class='right-block']/*[contains(@class, " +
+                            "'content_price') and (*[contains(@class, 'old-price')])]/span[2]")).getText().substring(1));
             prices.add(price);
-            System.out.println(price);
         }
 
         assertThat(prices, isSortedAscending());

@@ -7,7 +7,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
 
 public class SortingCollections extends TypeSafeMatcher<Collection<Double>> {
 
@@ -16,8 +16,7 @@ public class SortingCollections extends TypeSafeMatcher<Collection<Double>> {
 
         try {
             ArrayList<Double> arrayList = new ArrayList<>(collection);
-            Collections.sort(arrayList);
-
+            arrayList.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
             return collection.equals(arrayList);
         } catch (NoSuchElementException e) {
             return false;
