@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class SortingCollections extends TypeSafeMatcher<Collection<Integer>> {
+public class SortingCollections extends TypeSafeMatcher<Collection<Double>> {
 
     @Override
-    protected boolean matchesSafely(Collection<Integer> collection) {
+    protected boolean matchesSafely(Collection<Double> collection) {
 
         try {
-            ArrayList<Integer> arrayList = new ArrayList<>(collection);
+            ArrayList<Double> arrayList = new ArrayList<>(collection);
             Collections.sort(arrayList);
 
             return collection.equals(arrayList);
@@ -24,13 +24,24 @@ public class SortingCollections extends TypeSafeMatcher<Collection<Integer>> {
         }
     }
 
-    public static Matcher<Collection<Integer>> isSortedAscending() {
+    public static Matcher<Collection<Double>> isSortedAscending() {
         return new SortingCollections();
     }
+
+//    @Override
+//    protected boolean matchesSafely(Collection<WebElement> webElements) {
+//        try {
+//
+//            ArrayList<WebElement> arrayList = new ArrayList<>(webElements);
+//          //  Collections.sort(arrayList);
+//
+//            return webElements.equals(arrayList);
+//        } catch (NoSuchElementException e) {
+//        return false;}
+//    }
 
     @Override
     public void describeTo(Description description) {
         description.appendText("the collection is sorted ");
     }
-
 }

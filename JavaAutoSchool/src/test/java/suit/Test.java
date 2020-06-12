@@ -1,14 +1,18 @@
 package suit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static matchers.SortingCollections.isSortedAscending;
@@ -18,6 +22,14 @@ public class Test {
 
     public static WebDriver driver;
 
+    @DataProvider
+    public static Object[][] dataForSearching() {
+        return new Object[][]{
+                new Object[]{"SUMMER"},
+                new Object[]{"Dress"},
+                new Object[]{"t-shirt"},
+        };
+    }
 
     @BeforeClass
     public static void startDriver() {
@@ -30,19 +42,24 @@ public class Test {
     }
 
 
-    @org.testng.annotations.Test
-    public void checkSearching() {
+    @org.testng.annotations.Test(priority = 1, dataProvider = "dataForSearching")
+    public void checkSearching(String searchWord) {
 
-        String searchWord = "SUMMER";
-        driver.findElement(By.xpath("//input[@id='search_query_top']")).sendKeys(searchWord);
+        //  String searchWord = "SUMMER";
+        WebElement inputFieldSearch = driver.findElement(By.xpath("//input[@id='search_query_top']"));
+        inputFieldSearch.sendKeys(searchWord);
         driver.findElement(By.xpath("//button[@name='submit_search']")).click(); // click on the search icon
 
         WebElement resultWord = driver.findElement(By.xpath("//span[contains(@class,'lighter')]"));
 
+        inputFieldSearch.click();
+        inputFieldSearch.clear();
+
         Assert.assertEquals(String.format("\"%s\"", searchWord), resultWord.getText());
+
     }
 
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(priority = 2)
     public void checkSortingListOfProduct() {
 
         driver.findElement(By.xpath("//select[@id='selectProductSort']")).click(); // click on "Sort by" drop-down menu
@@ -50,25 +67,55 @@ public class Test {
         driver.findElement(By.xpath("//option[contains(text(),'Price: Highest first')]")).click();
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        List<WebElement> listOfProduct = driver.findElements(By.xpath("//ul[contains(@class,'product_list grid row')]/li"));
 
+        ////div/div[2]/div[1]/span[2]    - старая цена
+        //  //div/div[2]/div[1]/span[1] - актуальная цена
+        ArrayList<Double> prices = new ArrayList<>();
+        for (WebElement webElement : listOfProduct) {
+            double price = Double.parseDouble(webElement
+                    .findElement(By.xpath(".//div/div[2]/div[1]/span[@class='old-price product-price'] | .//div/div[2]/div[1]/span[@itemprop='price']")).getText().substring(1));
+            //    .findElement(By.xpath(".//div/div[2]/div[1]/span[@class='old-price product-price' or @itemprop='price'] ")).getText().substring(1));
 
-        ArrayList<Integer> newList = new ArrayList<>();
+            prices.add(price);
+            System.out.println(price);
+        }
 
-        newList.add(1);
-        newList.add(5);
-        newList.add(2);
-        newList.add(3);
+        assertThat(prices, isSortedAscending());
 
-        assertThat(newList, isSortedAscending());
-//        JavascriptExecutor jse = (JavascriptExecutor) driver;
-//        jse.executeScript("window.scrollBy(0,500)", "");
     }
 
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(priority = 3)
     public void checkAddingProductToCart() {
-        /* "Add to cart" button on product  */
-        driver.findElement(By.xpath("//li[contains(@class,'block_product')][2]//span[text()='Add to cart']"));
+        String productName = driver.findElement(By.xpath("//ul[contains(@class,'product_list grid row')]/li[1]//h5/a")).getText();
+        System.out.println(productName);
+        String productPrice = driver.findElement(By.xpath("//ul[contains(@class,'product_list grid row')]/li[1]//div[1]/span[1]")).getText();
+        System.out.println(productPrice);
 
+        /* click on "Add to cart" button on first product  */
+        Actions builder = new Actions(driver);
+        builder.moveToElement(driver.findElement(By.xpath("//div[@id='center_column']/ul/li[1]/div"))).build().perform();
+        driver.findElement(By.xpath("//li[contains(@class,'block_product')][1]//span[text()='Add to cart']")).click();
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        driver.findElement(By.xpath("//div[@id='layer_cart']/div[1]/div[1]/span")).click(); // close pop-up
+
+        driver.findElement(By.xpath("//div[@class='shopping_cart']/a")).click(); // open Cart page
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,250)", "");
+
+
+        String productNameInCart = driver.findElement(By.xpath("//td[@class='cart_description']/p")).getText();
+        System.out.println(productNameInCart);
+
+        String productPriceInCart = driver.findElement(By.xpath("//td[@data-title='Total']/span[@class='price']")).getText();
+        System.out.println(productPriceInCart);
+
+
+        Assert.assertEquals(productName, productNameInCart, "Name of product from list and name of product in cart aren't equals.");
+        Assert.assertEquals(productPrice, productPriceInCart, "Price of product from list and price of product in cart aren't equals.");
     }
 
 
