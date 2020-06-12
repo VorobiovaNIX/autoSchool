@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All suit.Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/mabookair/nixsolutions/autoSchool/JavaAutoSchool/target"/>
+
+    <!-- TESTS FOR Chrome browser -->
+    <test name="suit.Test" verbose="2" preserve-order="true">
+<!--        <parameter name="browser" value="Chrome"/>-->
+        <classes>
+            <class name="suit.Test"/>
+        </classes>
+    </test>
+
+
+</suite>
