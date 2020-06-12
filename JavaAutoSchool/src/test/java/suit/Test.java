@@ -69,10 +69,8 @@ public class Test {
         //  //div/div[2]/div[1]/span[1] - актуальная цена
         ArrayList<Double> prices = new ArrayList<>();
         for (WebElement webElement : listOfProduct) {
-            double price = Double.parseDouble(webElement
-                    .findElement(By.xpath(".//div[@class='right-block']/*[contains(@class, 'content_price') and " +
-                            "not(*[contains(@class, 'old-price')])] | .//div[@class='right-block']/*[contains(@class, " +
-                            "'content_price') and (*[contains(@class, 'old-price')])]/span[2]")).getText().substring(1));
+            double price = Double.parseDouble(webElement.findElement(By.xpath(".//div[@class='right-block']/*" +
+                    "[contains(@class, 'content_price')]/span[not(contains(@class, 'price-percent-reduction'))][last()]")).getText().substring(1));
             prices.add(price);
         }
 
