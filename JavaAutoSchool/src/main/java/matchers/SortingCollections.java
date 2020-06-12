@@ -28,18 +28,6 @@ public class SortingCollections extends TypeSafeMatcher<Collection<Double>> {
         return new SortingCollections();
     }
 
-//    @Override
-//    protected boolean matchesSafely(Collection<WebElement> webElements) {
-//        try {
-//
-//            ArrayList<WebElement> arrayList = new ArrayList<>(webElements);
-//          //  Collections.sort(arrayList);
-//
-//            return webElements.equals(arrayList);
-//        } catch (NoSuchElementException e) {
-//        return false;}
-//    }
-
     @Override
     public void describeTo(Description description) {
         description.appendText("the collection is sorted ");

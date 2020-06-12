@@ -25,9 +25,9 @@ public class Test {
     @DataProvider
     public static Object[][] dataForSearching() {
         return new Object[][]{
-                new Object[]{"SUMMER"},
                 new Object[]{"Dress"},
                 new Object[]{"t-shirt"},
+                new Object[]{"Summer"}
         };
     }
 
@@ -45,17 +45,13 @@ public class Test {
     @org.testng.annotations.Test(priority = 1, dataProvider = "dataForSearching")
     public void checkSearching(String searchWord) {
 
-        //  String searchWord = "SUMMER";
-        WebElement inputFieldSearch = driver.findElement(By.xpath("//input[@id='search_query_top']"));
-        inputFieldSearch.sendKeys(searchWord);
+        driver.findElement(By.xpath("//input[@id='search_query_top']")).sendKeys(searchWord);
         driver.findElement(By.xpath("//button[@name='submit_search']")).click(); // click on the search icon
+        driver.findElement(By.xpath("//input[@id='search_query_top']")).clear(); // clear search field
 
         WebElement resultWord = driver.findElement(By.xpath("//span[contains(@class,'lighter')]"));
 
-        inputFieldSearch.click();
-        inputFieldSearch.clear();
-
-        Assert.assertEquals(String.format("\"%s\"", searchWord), resultWord.getText());
+        Assert.assertEquals(String.format("\"%s\"", searchWord).toUpperCase(), resultWord.getText());
 
     }
 
