@@ -1,10 +1,13 @@
 package pages.pageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
 import utils.Waiters;
 
@@ -71,11 +74,12 @@ public class SearchResultPage extends BasePage {
 
     public CartPage openCartPage() {
 
-        // driver.switchTo().frame(driver.findElement(By.name("iframeWithElement")));
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
 
+        js.executeScript("arguments[0].scrollIntoView(true);", proceedToCheckoutButton);
+        wait.until(ExpectedConditions.elementToBeClickable(proceedToCheckoutButton));
 
-//        Actions act = new Actions(driver);
-//        act.moveToElement(proceedToCheckoutButton).click().perform();
         proceedToCheckoutButton.click(); // open Cart page
         Waiters.implicitWait(driver, Waiters.TIME_TEN, TimeUnit.SECONDS);
 

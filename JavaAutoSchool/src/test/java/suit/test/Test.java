@@ -3,6 +3,8 @@ package suit.test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import pages.pageObject.CartPage;
@@ -22,7 +24,6 @@ public class Test extends BaseTest {
     SearchResultPage searchResultPage;
     CartPage cartPage;
 
-
     @BeforeTest
     public void startDriver() {
         driver = getDriver();
@@ -35,7 +36,10 @@ public class Test extends BaseTest {
     public void checkSearching(String searchWord) {
         mainWebSitePage.open();
         mainWebSitePage.search(searchWord);
+
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         WebElement resultWord = driver.findElement(By.xpath("//span[contains(@class,'lighter')]"));
+        wait.until(ExpectedConditions.visibilityOf(resultWord));
 
         Assert.assertEquals(String.format("\"%s\"", searchWord).toUpperCase(), resultWord.getText());
     }
