@@ -1,5 +1,6 @@
 package suit.test;
 
+import org.hamcrest.Matcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,10 @@ import suit.BaseTest;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static suit.BaseTest.getDriver;
 import static utils.SortingCollectionsMatcher.isSortedAscending;
 
-public class Test extends BaseTest {
+public class CheckWebSiteTest extends BaseTest {
 
     WebDriver driver;
     MainWebSitePage mainWebSitePage;
@@ -55,17 +57,15 @@ public class Test extends BaseTest {
     @org.testng.annotations.Test(priority = 3)
     public void checkAddingProductToCart() {
 
-        String productName = driver.findElement(By.xpath("//ul[contains(@class,'product_list grid row')]/li[1]//h5/a")).getText();
-        String productPrice = driver.findElement(By.xpath("//ul[contains(@class,'product_list grid row')]/li[1]//div[1]/span[1]")).getText();
+        String productName = searchResultPage.getNameProduct();
+        String productPrice = searchResultPage.getPriceProduct();
 
         searchResultPage.moveMouseOnProductContainer();
         searchResultPage.clickOnAddToCart();
-
         searchResultPage.openCartPage();
 
-        String productNameInCart = driver.findElement(By.xpath("//td[@class='cart_description']/p")).getText();
-        String productPriceInCart = driver.findElement(By.xpath("//td[@data-title='Total']/span[@class='price']")).getText();
-
+        String productNameInCart = searchResultPage.getProductNameInCart();
+        String productPriceInCart = searchResultPage.getProductPriceInCart();
 
         Assert.assertEquals(productName, productNameInCart, "Name of product from list and name of product in cart aren't equals.");
         Assert.assertEquals(productPrice, productPriceInCart, "Price of product from list and price of product in cart aren't equals.");

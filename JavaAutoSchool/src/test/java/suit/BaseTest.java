@@ -27,14 +27,19 @@ public abstract class BaseTest {
     @BeforeTest
     @Parameters("browser")
     public void setUp(String browser) {
-        if (browser.equals("Firefox")) {
-            driver = DriverFactory.getManager(DriverType.FIREFOX);
-        } else if (browser.equals("Chrome")) {
-            driver = DriverFactory.getManager(DriverType.CHROME);
-        } else if (browser.equals("Safari")) {
-            driver = DriverFactory.getManager(DriverType.SAFARI);
-        } else {
-            System.out.println("Invalid browser " + browser);
+        switch (browser) {
+            case "Firefox":
+                driver = DriverFactory.getManager(DriverType.FIREFOX);
+                break;
+            case "Chrome":
+                driver = DriverFactory.getManager(DriverType.CHROME);
+                break;
+            case "Safari":
+                driver = DriverFactory.getManager(DriverType.SAFARI);
+                break;
+            default:
+                System.out.println("Invalid browser " + browser);
+                break;
         }
 
         driver.manage().window().maximize();
@@ -43,8 +48,10 @@ public abstract class BaseTest {
 
     @AfterTest
     public static void tearDown() {
-        driver.quit();
-        System.out.println("All close up activities completed");
+        if (driver != null) {
+            driver.quit();
+            System.out.println("All close up activities completed");
+        }
     }
 
     public static WebDriver getDriver() {

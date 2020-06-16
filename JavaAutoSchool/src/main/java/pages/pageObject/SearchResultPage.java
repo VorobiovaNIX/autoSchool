@@ -38,6 +38,18 @@ public class SearchResultPage extends BasePage {
     @FindBy(xpath = "//div[@id='layer_cart']//span[contains(text(),'Proceed to checkout')]")
     private WebElement proceedToCheckoutButton;
 
+    @FindBy(xpath = "//ul[contains(@class,'product_list grid row')]/li[1]//h5/a")
+    private WebElement nameProduct;
+
+    @FindBy(xpath = "//ul[contains(@class,'product_list grid row')]/li[1]//div[1]/span[1]")
+    private WebElement priceProduct;
+
+    @FindBy(xpath = "//td[@class='cart_description']/p")
+    private WebElement productNameInCart;
+
+    @FindBy(xpath = "//td[@data-title='Total']/span[@class='price']")
+    private WebElement productPriceInCart;
+
     public void filteringByPrice() {
         dropDownMenu.click(); // click on "Sort by" drop-down menu
         option.click();
@@ -67,10 +79,21 @@ public class SearchResultPage extends BasePage {
         Waiters.implicitWait(driver, Waiters.TIME_FIVE, TimeUnit.SECONDS);
     }
 
-    public void saveNameAndPriceCertainProduct() {
-
+    public String getNameProduct() {
+        return nameProduct.getText();
     }
 
+    public String getPriceProduct() {
+        return priceProduct.getText();
+    }
+
+    public String getProductNameInCart() {
+        return productNameInCart.getText();
+    }
+
+    public String getProductPriceInCart() {
+        return productPriceInCart.getText();
+    }
 
     public CartPage openCartPage() {
 
@@ -82,10 +105,6 @@ public class SearchResultPage extends BasePage {
 
         proceedToCheckoutButton.click(); // open Cart page
         Waiters.implicitWait(driver, Waiters.TIME_TEN, TimeUnit.SECONDS);
-
-//        JavascriptExecutor jse = (JavascriptExecutor) driver;
-//        jse.executeScript("window.scrollBy(0,250)", "");
-
         return new CartPage(driver);
     }
 }
