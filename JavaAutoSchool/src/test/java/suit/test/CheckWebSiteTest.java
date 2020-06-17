@@ -1,6 +1,7 @@
 package suit.test;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,7 +44,7 @@ public class CheckWebSiteTest extends BaseTest {
         WebElement resultWord = driver.findElement(By.xpath("//span[contains(@class,'lighter')]"));
         wait.until(ExpectedConditions.visibilityOf(resultWord));
 
-        Assert.assertEquals(String.format("\"%s\"", searchWord).toUpperCase(), resultWord.getText());
+        assertThat(resultWord.getText(),Matchers.equalToIgnoringCase(String.format("\"%s\"", searchWord)));
     }
 
     @org.testng.annotations.Test(priority = 2)
@@ -67,8 +68,8 @@ public class CheckWebSiteTest extends BaseTest {
         String productNameInCart = searchResultPage.getProductNameInCart();
         String productPriceInCart = searchResultPage.getProductPriceInCart();
 
-        Assert.assertEquals(productName, productNameInCart, "Name of product from list and name of product in cart aren't equals.");
-        Assert.assertEquals(productPrice, productPriceInCart, "Price of product from list and price of product in cart aren't equals.");
+        assertThat(productName,Matchers.equalTo(productNameInCart));
+        assertThat(productPrice,Matchers.equalTo(productPriceInCart));
     }
 
 }
