@@ -1,4 +1,4 @@
-package suit;
+package suit.test;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;

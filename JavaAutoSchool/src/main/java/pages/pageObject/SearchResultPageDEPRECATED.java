@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.BasePage;
+import pages.WebPage;
 import utils.Waiters;
 
 import java.util.ArrayList;
@@ -17,38 +17,38 @@ import java.util.concurrent.TimeUnit;
 
 import static utils.Waiters.TIME_FIVE;
 
-public class SearchResultPage extends BasePage {
+public class SearchResultPageDEPRECATED extends WebPage {
 
-    public SearchResultPage(WebDriver driver) {
+    public SearchResultPageDEPRECATED(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(xpath = "//select[@id='selectProductSort']")
-    private WebElement dropDownMenu;
+//    @FindBy(xpath = "//select[@id='selectProductSort']")
+//    private WebElement dropDownMenu;
+//
+//    @FindBy(xpath = "//option[contains(text(),'Price: Highest first')]")
+//    private WebElement option;
 
-    @FindBy(xpath = "//option[contains(text(),'Price: Highest first')]")
-    private WebElement option;
+//    @FindBy(xpath = "//div[@id='center_column']//li[1]/div")
+//    private WebElement firstProductContainer;
 
-    @FindBy(xpath = "//div[@id='center_column']//li[1]/div")
-    private WebElement firstProductContainer;
+//    @FindBy(xpath = "//li[contains(@class,'block_product')][1]//span[text()='Add to cart']")
+//    private WebElement addToCartButton;
 
-    @FindBy(xpath = "//li[contains(@class,'block_product')][1]//span[text()='Add to cart']")
-    private WebElement addToCartButton;
+//    @FindBy(xpath = "//div[@id='layer_cart']//span[contains(text(),'Proceed to checkout')]")
+//    private WebElement proceedToCheckoutButton;
 
-    @FindBy(xpath = "//div[@id='layer_cart']//span[contains(text(),'Proceed to checkout')]")
-    private WebElement proceedToCheckoutButton;
-
-    @FindBy(xpath = "//ul[contains(@class,'product_list grid row')]/li[1]//h5/a")
-    private WebElement nameProduct;
-
-    @FindBy(xpath = "//ul[contains(@class,'product_list grid row')]/li[1]//div[1]/span[1]")
-    private WebElement priceProduct;
-
-    @FindBy(xpath = "//td[@class='cart_description']/p")
-    private WebElement productNameInCart;
-
-    @FindBy(xpath = "//td[@data-title='Total']/span[@class='price']")
-    private WebElement productPriceInCart;
+//    @FindBy(xpath = "//li[contains(@class,'block_product')][1]//h5/a")
+//    private WebElement nameProduct;
+//
+//    @FindBy(xpath = "//li[contains(@class,'block_product')][1]//div[1]/span[1]")
+//    private WebElement priceProduct;
+//
+//    @FindBy(xpath = "//td[@class='cart_description']/p")
+//    private WebElement productNameInCart;
+//
+//    @FindBy(xpath = "//td[@data-title='Total']/span[@class='price']")
+//    private WebElement productPriceInCart;
 
     public void filteringByPrice() {
         dropDownMenu.click(); // click on "Sort by" drop-down menu
@@ -56,7 +56,7 @@ public class SearchResultPage extends BasePage {
         Waiters.implicitWait(driver, TIME_FIVE, TimeUnit.SECONDS);
     }
 
-    List<WebElement> listOfProduct = driver.findElements(By.xpath("//ul[contains(@class,'product_list grid row')]/li"));
+    //List<WebElement> listOfProduct = driver.findElements(By.xpath("//ul[contains(@class,'product_list grid row')]/li"));
 
     public ArrayList<Double> getListOfPriceOfProducts() {
 
