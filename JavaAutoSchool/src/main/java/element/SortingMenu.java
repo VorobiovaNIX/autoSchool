@@ -6,9 +6,9 @@ import io.qameta.atlas.webdriver.extension.FindBy;
 public interface SortingMenu extends AtlasWebElement<SortingMenu> {
 
     @FindBy(".//select[@id='selectProductSort']")
-    AtlasWebElement dropDownMenu();
+    HtmlElement dropDownMenu();
 
     @FindBy(".//option[contains(text(),'Price: Highest first')]")
-    AtlasWebElement option();
+    HtmlElement option();
 
 }

@@ -1,6 +1,7 @@
 package steps;
 
 import io.qameta.allure.Step;
+import io.qameta.atlas.webdriver.AtlasWebElement;
 import org.openqa.selenium.WebDriver;
 import page.MainPage;
 import utils.Waiters;
@@ -26,13 +27,9 @@ public class MainPageSteps extends BaseSteps {
     @Step("Make search with input string «{input}»")
     public SearchPageSteps makeSearch(String input) {
 
-//        AtlasWebElement element = onMainPage().header().searchInput().waitUntil(isDisplayed());
-//        element.sendKeys(input);
-//        element.submit();
-        onMainPage().header().searchInput().waitUntil(isDisplayed()).sendKeys(input);
-        onMainPage().header().searchInput().submit();
-        onMainPage().header().searchInput().clear();
-
+        AtlasWebElement element = onMainPage().header().searchInput();
+        element.waitUntil(isDisplayed()).sendKeys(input);
+        element.submit();
         return new SearchPageSteps(driver);
     }
 

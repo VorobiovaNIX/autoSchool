@@ -6,6 +6,6 @@ import io.qameta.atlas.webdriver.extension.FindBy;
 public interface AddingToCartPopup extends AtlasWebElement<AddingToCartPopup> {
 
     @FindBy(".//span[contains(text(),'Proceed to checkout')]")
-    AtlasWebElement proceedToCheckoutButton();
+    HtmlElement proceedToCheckoutButton();
 
 }
