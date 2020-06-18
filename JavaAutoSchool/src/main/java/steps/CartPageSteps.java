@@ -12,16 +12,6 @@ public class CartPageSteps extends BaseSteps {
         super(driver);
     }
 
-    @Step("Get name of first product on cart page")
-    public String getProductNameInCart() {
-        return onCartPage().productsInCart().get(0).productNameInCart().getText();
-    }
-
-    @Step("Get price of first product on cart page")
-    public String getProductPriceInCart() {
-        return onCartPage().productsInCart().get(0).productPriceInCart().getText();
-    }
-
     @Step("Check that price and name first product are equal one")
     public void checkPriceAndNameOnCartPage(String productName, String productPrice) {
         onCartPage().productsInCart().get(0).productNameInCart().should(checkText(productName));

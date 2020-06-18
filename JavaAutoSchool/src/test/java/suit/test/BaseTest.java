@@ -3,17 +3,17 @@ package suit.test;
 import browserFactory.DriverFactory;
 import browserFactory.DriverType;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
-import utils.Waiters;
-
-import java.util.concurrent.TimeUnit;
+import org.testng.annotations.*;
+import steps.CartPageSteps;
+import steps.MainPageSteps;
+import steps.SearchPageSteps;
 
 public abstract class BaseTest {
 
     private static WebDriver driver;
+    MainPageSteps mainWebSitePage;
+    SearchPageSteps searchResultPage;
+    CartPageSteps cartPage;
 
     @DataProvider
     public static Object[][] dataForSearching() {
@@ -43,7 +43,13 @@ public abstract class BaseTest {
         }
 
         driver.manage().window().maximize();
-        Waiters.implicitWait(driver, Waiters.TIME_FIVE, TimeUnit.SECONDS);
+    }
+
+    @BeforeMethod
+    public void startDriver() {
+        mainWebSitePage = new MainPageSteps(driver);
+        searchResultPage = new SearchPageSteps(driver);
+        cartPage = new CartPageSteps(driver);
     }
 
     @AfterTest
@@ -52,10 +58,6 @@ public abstract class BaseTest {
             driver.quit();
             System.out.println("All close up activities completed");
         }
-    }
-
-    public static WebDriver getDriver() {
-        return driver;
     }
 }
 

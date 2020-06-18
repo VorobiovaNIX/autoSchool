@@ -10,5 +10,4 @@ public interface CartPage extends WebPage, WithHeader {
 
     @FindBy("//tbody/tr")
     ElementsCollection<ProductInCart> productsInCart();
-
 }
