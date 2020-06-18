@@ -5,9 +5,9 @@ import io.qameta.atlas.webdriver.WebDriverConfiguration;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeTest;
-import pages.steps.CartPageSteps;
-import pages.steps.MainPageSteps;
-import pages.steps.SearchPageSteps;
+import steps.CartPageSteps;
+import steps.MainPageSteps;
+import steps.SearchPageSteps;
 
 import java.util.ArrayList;
 
@@ -27,9 +27,9 @@ public class CheckWebSiteTest extends BaseTest {
     public void startDriver() {
         driver = getDriver();
         atlas = new Atlas(new WebDriverConfiguration(driver));
-        mainWebSitePage = new MainPageSteps(driver,atlas);
-        searchResultPage = new SearchPageSteps(driver,atlas);
-        cartPage = new CartPageSteps(driver,atlas);
+        mainWebSitePage = new MainPageSteps(driver);
+        searchResultPage = new SearchPageSteps(driver);
+        cartPage = new CartPageSteps(driver);
     }
 
     @org.testng.annotations.Test(priority = 1, dataProvider = "dataForSearching")

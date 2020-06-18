@@ -1,7 +1,6 @@
 package steps;
 
 import io.qameta.allure.Step;
-import io.qameta.atlas.core.Atlas;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +17,7 @@ import static utils.WebElementIsPresent.isDisplayed;
 
 public class SearchPageSteps extends BaseSteps {
 
-    public SearchPageSteps(WebDriver driver, Atlas atlas) {
+    public SearchPageSteps(WebDriver driver) {
         super(driver);
     }
 
@@ -71,7 +70,7 @@ public class SearchPageSteps extends BaseSteps {
     public CartPageSteps openCartPage() {
         onSearchPage().layerCart().waitUntil(isDisplayed()).proceedToCheckoutButton().click();
         Waiters.implicitWait(driver, Waiters.TIME_TEN, TimeUnit.SECONDS);
-        return new CartPageSteps(driver, atlas);
+        return new CartPageSteps(driver);
     }
 
     private SearchPage onSearchPage() {

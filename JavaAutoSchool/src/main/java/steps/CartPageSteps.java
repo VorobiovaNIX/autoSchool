@@ -1,13 +1,12 @@
 package steps;
 
 import io.qameta.allure.Step;
-import io.qameta.atlas.core.Atlas;
 import org.openqa.selenium.WebDriver;
 import page.CartPage;
 
 public class CartPageSteps extends BaseSteps{
 
-    public CartPageSteps(WebDriver driver, Atlas atlas) {
+    public CartPageSteps(WebDriver driver) {
         super(driver);
     }
 
