@@ -3,7 +3,7 @@ package pages.element;
 import io.qameta.atlas.webdriver.AtlasWebElement;
 import io.qameta.atlas.webdriver.extension.FindBy;
 
-public interface ProductInCart extends AtlasWebElement {
+public interface ProductInCart extends AtlasWebElement<ProductInCart> {
 
     @FindBy(".//td[@class='cart_description']/p")
     AtlasWebElement productNameInCart();

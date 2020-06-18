@@ -5,5 +5,4 @@ import pages.layout.WithHeader;
 
 public interface MainPage extends WebPage, WithHeader {
 
-
 }
