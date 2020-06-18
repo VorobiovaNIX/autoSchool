@@ -2,6 +2,7 @@ package pages.steps;
 
 import io.qameta.allure.Step;
 import io.qameta.atlas.core.Atlas;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,8 @@ import utils.WebElementIsPresent;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.Matchers.not;
 
 public class SearchPageSteps extends BaseSteps {
 
@@ -33,6 +36,7 @@ public class SearchPageSteps extends BaseSteps {
     @Step("Check that sorting results contain exactly expected items ")
     public ArrayList<Double> getListOfPriceOfProducts() {
         ArrayList<Double> prices = new ArrayList<>();
+        onSearchPage().listOfProducts().waitUntil(not(Matchers.empty()));
         for (WebElement webElement : onSearchPage().listOfProducts()) {
             double price = Double.parseDouble(webElement.findElement(By.xpath(".//div[@class='right-block']/*" +
                     "[contains(@class, 'content_price')]/span[not(contains(@class, 'price-percent-reduction'))][last()]")).getText().substring(1));
