@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class CheckWebSiteTest extends BaseTest {
+public class CheckWebSiteTest extends tests.BaseTest {
 
     @Test(priority = 1, dataProvider = "dataForSearching")
     public void checkSearching(String searchWord) {
