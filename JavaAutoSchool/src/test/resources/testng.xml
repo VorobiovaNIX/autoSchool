@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="tests.CheckWebSiteTest">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="CheckWebSiteTest">
     <test verbose="2" preserve-order="true" name="/Users/mabookair/nixsolutions/autoSchool/JavaAutoSchool/target"/>
 
     <!-- TESTS FOR Chrome browser -->
     <test name="ChromeTests" verbose="2" preserve-order="true">
         <parameter name="browser" value="Chrome"></parameter>
         <classes>
-            <class name="tests.CheckWebSiteTest"></class>
+            <class name="CheckWebSiteTest"></class>
         </classes>
     </test>
 
-    <!-- TESTS FOR Firefox BROWSER -->
-    <test name="FirefoxTests" verbose="2" preserve-order="true">
-        <parameter name="browser" value="Firefox"></parameter>
-        <classes>
-            <class name="tests.CheckWebSiteTest"></class>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; TESTS FOR Firefox BROWSER &ndash;&gt;-->
+<!--    <test name="FirefoxTests" verbose="2" preserve-order="true">-->
+<!--        <parameter name="browser" value="Firefox"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="CheckWebSiteTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <!-- TESTS FOR Safari BROWSER -->
-    <test name="SafariTests" verbose="2" preserve-order="true">
-        <parameter name="browser" value="Safari"></parameter>
-        <classes>
-            <class name="tests.CheckWebSiteTest"></class>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; TESTS FOR Safari BROWSER &ndash;&gt;-->
+<!--    <test name="SafariTests" verbose="2" preserve-order="true">-->
+<!--        <parameter name="browser" value="Safari"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="CheckWebSiteTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

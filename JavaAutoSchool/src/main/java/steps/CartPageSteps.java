@@ -1,5 +1,6 @@
 package steps;
 
+import element.ProductInCart;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import page.CartPage;
@@ -14,8 +15,9 @@ public class CartPageSteps extends BaseSteps {
 
     @Step("Check that price and name first product are equal one")
     public void checkPriceAndNameOnCartPage(String productName, String productPrice) {
-        onCartPage().productsInCart().get(0).productNameInCart().should(checkText(productName));
-        onCartPage().productsInCart().get(0).productPriceInCart().should(checkText(productPrice));
+        ProductInCart firstProductInCart = onCartPage().productsInCart().get(0);
+        firstProductInCart.productNameInCart().should(checkText(productName));
+        firstProductInCart.productPriceInCart().should(checkText(productPrice));
     }
 
     private CartPage onCartPage() {

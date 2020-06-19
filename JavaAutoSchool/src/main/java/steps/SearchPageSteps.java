@@ -30,8 +30,7 @@ public class SearchPageSteps extends BaseSteps {
     }
 
     @Step("Check that sorting results contain exactly «{expectedItems}»")
-    public void checkThatListOfProductsIsSortingAsExpected() {
-
+    public void checkThatListOfProductsIsSortingAsExpected()  {
         onSearchPage().priceForSorting()
                 .waitUntil(not(empty()))
                 .extract(price -> Double.parseDouble(price.getText()
@@ -57,7 +56,7 @@ public class SearchPageSteps extends BaseSteps {
 
     @Step("Click on 'Add to cart' button ")
     public SearchPageSteps clickOnAddToCart() {
-        onSearchPage().listOfProducts().get(0).waitUntil(isDisplayed()).AddToCartButton().click();
+        onSearchPage().listOfProducts().get(0).waitUntil(not(empty())).AddToCartButton().click();
         return this;
     }
 

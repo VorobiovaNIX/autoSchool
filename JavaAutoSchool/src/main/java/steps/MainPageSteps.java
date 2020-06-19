@@ -4,9 +4,6 @@ import io.qameta.allure.Step;
 import io.qameta.atlas.webdriver.AtlasWebElement;
 import org.openqa.selenium.WebDriver;
 import page.MainPage;
-import utils.Waiters;
-
-import java.util.concurrent.TimeUnit;
 
 import static utils.WebElementIsPresent.isDisplayed;
 
@@ -20,7 +17,6 @@ public class MainPageSteps extends BaseSteps {
     @Step("Open web site ")
     public MainPageSteps open() {
         driver.get(URL_AUTOPRACTICE);
-        Waiters.implicitWait(driver, Waiters.TIME_TEN, TimeUnit.SECONDS);
         return this;
     }
 
