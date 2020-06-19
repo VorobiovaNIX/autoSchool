@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import page.SearchPage;
 
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
 import static utils.CheckTextOfWebElement.checkText;
 import static utils.SortingCollectionsMatcher.isSortedAscending;
 import static utils.WebElementIsPresent.isDisplayed;
@@ -31,11 +33,9 @@ public class SearchPageSteps extends BaseSteps {
     public void checkThatListOfProductsIsSortingAsExpected() {
 
         onSearchPage().priceForSorting()
-                .extract(price -> Double.parseDouble(price.getText().substring(1))).should(isSortedAscending());
-
-//        onSearchPage().listOfProducts().waitUntil(not(empty()))
-//                .forEach((product -> product.pricesOfProducts()
-//                        .extract(price -> Double.parseDouble(price.getText().substring(1))).should(isSortedAscending())));
+                .waitUntil(not(empty()))
+                .extract(price -> Double.parseDouble(price.getText()
+                        .substring(1))).should(isSortedAscending());
     }
 
     @Step("Saving name of first product in listening")

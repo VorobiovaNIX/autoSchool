@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All suit.test.CheckWebSiteTest Suite">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="tests.CheckWebSiteTest">
     <test verbose="2" preserve-order="true" name="/Users/mabookair/nixsolutions/autoSchool/JavaAutoSchool/target"/>
 
     <!-- TESTS FOR Chrome browser -->
     <test name="ChromeTests" verbose="2" preserve-order="true">
         <parameter name="browser" value="Chrome"></parameter>
         <classes>
-            <class name="suit.test.CheckWebSiteTest"></class>
+            <class name="tests.CheckWebSiteTest"></class>
         </classes>
     </test>
 
@@ -14,7 +14,7 @@
     <test name="FirefoxTests" verbose="2" preserve-order="true">
         <parameter name="browser" value="Firefox"></parameter>
         <classes>
-            <class name="suit.test.CheckWebSiteTest"></class>
+            <class name="tests.CheckWebSiteTest"></class>
         </classes>
     </test>
 
@@ -22,7 +22,7 @@
     <test name="SafariTests" verbose="2" preserve-order="true">
         <parameter name="browser" value="Safari"></parameter>
         <classes>
-            <class name="suit.test.CheckWebSiteTest"></class>
+            <class name="tests.CheckWebSiteTest"></class>
         </classes>
     </test>
 
