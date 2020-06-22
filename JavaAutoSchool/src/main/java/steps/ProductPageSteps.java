@@ -3,11 +3,11 @@ package steps;
 import element.AddingToCartPopup;
 import io.qameta.allure.Step;
 import io.qameta.atlas.webdriver.AtlasWebElement;
-import org.hamcrest.Matchers;
 import org.openqa.selenium.WebDriver;
 import page.ProductPage;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
 import static utils.CheckTextOfWebElement.checkText;
 
 public class ProductPageSteps extends BaseSteps {
@@ -47,9 +47,7 @@ public class ProductPageSteps extends BaseSteps {
         double expectedTotalPrice = Double.parseDouble(quantity) * Double.parseDouble(onProductPage()
                 .pricePerOneProduct().getText().substring(1));
 
-        double actualTotalPrice = Double.parseDouble(productPopup.totalPrice().getText().substring(1));
-
-        assertThat(actualTotalPrice, Matchers.equalTo(expectedTotalPrice));
+        productPopup.totalPrice().waitUntil(not(empty())).should(checkText(Double.toString(expectedTotalPrice)));
 
         onProductPage().layerCart().continueShopping().click();
     }

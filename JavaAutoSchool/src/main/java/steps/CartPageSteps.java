@@ -24,8 +24,8 @@ public class CartPageSteps extends BaseSteps {
         double expectedTotalPrice = Double.parseDouble(productPrice.substring(1)) * Double
                 .parseDouble(productInCart.quantity().getAttribute("value"));
 
-        productInCart.productNameInCart().should(checkText(productName));
-        productInCart.productPriceInCart().should(checkText(Double.toString(expectedTotalPrice)));
+        productInCart.productNameInCart().waitUntil(isDisplayed()).should(checkText(productName));
+        productInCart.productPriceInCart().waitUntil(isDisplayed()).should(checkText(Double.toString(expectedTotalPrice)));
 
     }
 
@@ -50,9 +50,10 @@ public class CartPageSteps extends BaseSteps {
     }
 
     @Step("Verify second product is still displayed on the card")
-    public void checkThatOtherProductIsDisplayed(int numberOfProduct) {
+    public CartPageSteps checkThatOtherProductIsDisplayed(int numberOfProduct) {
         ProductInCart productInCart = onCartPage().productsInCart().get(numberOfProduct - 2);
         productInCart.should(isDisplayed());
+        return this;
     }
 
     private CartPage onCartPage() {

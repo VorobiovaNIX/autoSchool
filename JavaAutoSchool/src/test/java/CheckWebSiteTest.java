@@ -31,8 +31,8 @@ public class CheckWebSiteTest extends BaseTest {
         String firstProductName = firstProduct.getNameProduct(1);
         String firstProductPrice = firstProduct.getPriceProduct(1);
 
-        firstProduct.openProductPage();
-        productPageSteps.selectSizeOfProduct("M")
+        firstProduct.openProductPage()
+                .selectSizeOfProduct("M")
                 .selectQuantityOfProduct("10")
                 .clickOnAddToCart()
                 .checkThatSizeAndTotalPriceAreCorrectOnPopup("10", "M");
@@ -41,22 +41,20 @@ public class CheckWebSiteTest extends BaseTest {
         String secondProductName = secondProduct.getNameProduct(1);
         String secondProductPrice = secondProduct.getPriceProduct(1);
 
-        secondProduct.openProductPage();
-        productPageSteps.selectSizeOfProduct("S")
+        secondProduct.openProductPage()
+                .selectSizeOfProduct("S")
                 .clickOnAddToCart()
                 .checkThatSizeAndTotalPriceAreCorrectOnPopup("1", "S");
 
-        productPageSteps.openShoppingCard();
-
-        cartPage.checkPriceAndNameOnCartPage(1, firstProductName, firstProductPrice);
+        productPageSteps.openShoppingCard()
+                .checkPriceAndNameOnCartPage(1, firstProductName, firstProductPrice);
 
         cartPage.checkPriceAndNameOnCartPage(2, secondProductName, secondProductPrice);
 
         int amountOfProductsBeforeRemoving = cartPage.getAmountOfProductsInCart();
-        cartPage.removeProductOnShoppingCart(1).checkThatOtherProductIsDisplayed(2);
-
-        cartPage.checkThatProductHasBeenRemoved(amountOfProductsBeforeRemoving);
-
+        cartPage.removeProductOnShoppingCart(1)
+                .checkThatOtherProductIsDisplayed(2)
+                .checkThatProductHasBeenRemoved(amountOfProductsBeforeRemoving);
 
     }
 
