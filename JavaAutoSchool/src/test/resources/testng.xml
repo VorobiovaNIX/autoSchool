@@ -10,20 +10,20 @@
         </classes>
     </test>
 
-<!--    &lt;!&ndash; TESTS FOR Firefox BROWSER &ndash;&gt;-->
-<!--    <test name="FirefoxTests" verbose="2" preserve-order="true">-->
-<!--        <parameter name="browser" value="Firefox"></parameter>-->
-<!--        <classes>-->
-<!--            <class name="CheckWebSiteTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!-- TESTS FOR Firefox BROWSER -->
+    <test name="FirefoxTests" verbose="2" preserve-order="true">
+        <parameter name="browser" value="Firefox"></parameter>
+        <classes>
+            <class name="CheckWebSiteTest"></class>
+        </classes>
+    </test>
 
-<!--    &lt;!&ndash; TESTS FOR Safari BROWSER &ndash;&gt;-->
-<!--    <test name="SafariTests" verbose="2" preserve-order="true">-->
-<!--        <parameter name="browser" value="Safari"></parameter>-->
-<!--        <classes>-->
-<!--            <class name="CheckWebSiteTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!-- TESTS FOR Safari BROWSER -->
+    <test name="SafariTests" verbose="2" preserve-order="true">
+        <parameter name="browser" value="Safari"></parameter>
+        <classes>
+            <class name="CheckWebSiteTest"></class>
+        </classes>
+    </test>
 
 </suite>

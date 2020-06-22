@@ -62,7 +62,7 @@ public class SearchPageSteps extends BaseSteps {
 
     @Step("Open cart page via 'Proceed to checkout' button on popup")
     public CartPageSteps openCartPage() {
-        onSearchPage().layerCart().waitUntil(isDisplayed()).proceedToCheckoutButton().click();
+        onSearchPage().layerCart().proceedToCheckoutButton().waitUntil(isDisplayed()).click();
         return new CartPageSteps(driver);
     }
 
