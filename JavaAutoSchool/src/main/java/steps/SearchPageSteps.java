@@ -30,7 +30,7 @@ public class SearchPageSteps extends BaseSteps {
     }
 
     @Step("Check that sorting results contain exactly «{expectedItems}»")
-    public void checkThatListOfProductsIsSortingAsExpected()  {
+    public void checkThatListOfProductsIsSortingAsExpected() {
         onSearchPage().priceForSorting()
                 .waitUntil(not(empty()))
                 .extract(price -> Double.parseDouble(price.getText()
@@ -38,13 +38,13 @@ public class SearchPageSteps extends BaseSteps {
     }
 
     @Step("Saving name of first product in listening")
-    public String getNameProduct() {
-        return onSearchPage().listOfProducts().get(0).nameProduct().getText();
+    public String getNameProduct(int numberOfProduct) {
+        return onSearchPage().listOfProducts().get(numberOfProduct - 1).nameProduct().getText();
     }
 
     @Step("Saving price of first product in listening")
-    public String getPriceProduct() {
-        return onSearchPage().listOfProducts().get(0).priceProduct().getText();
+    public String getPriceProduct(int numberOfProduct) {
+        return onSearchPage().listOfProducts().get(numberOfProduct - 1).priceProduct().getText();
     }
 
     @Step("Move mouse on product container to 'Add to cart' button is displayed ")
@@ -64,6 +64,12 @@ public class SearchPageSteps extends BaseSteps {
     public CartPageSteps openCartPage() {
         onSearchPage().layerCart().proceedToCheckoutButton().waitUntil(isDisplayed()).click();
         return new CartPageSteps(driver);
+    }
+
+    @Step("Open product page via click on product container")
+    public ProductPageSteps openProductPage() {
+        onSearchPage().listOfProducts().get(0).waitUntil(not(empty())).click();
+        return new ProductPageSteps(driver);
     }
 
     private SearchPage onSearchPage() {

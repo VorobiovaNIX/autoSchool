@@ -8,4 +8,7 @@ public interface Header extends AtlasWebElement<Header> {
     @FindBy(".//input[@id='search_query_top']")
     HtmlElement searchInput();
 
+    @FindBy(".//a[@title='View my shopping cart']")
+    HtmlElement cart();
+
 }

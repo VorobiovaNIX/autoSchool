@@ -10,4 +10,7 @@ public interface ProductInCart extends AtlasWebElement<ProductInCart> {
 
     @FindBy(".//td[@data-title='Total']/span[@class='price']")
     HtmlElement productPriceInCart();
+
+    @FindBy(".//i[@class='icon-trash']")
+    HtmlElement deleteIcon();
 }

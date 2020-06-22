@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import steps.CartPageSteps;
 import steps.MainPageSteps;
+import steps.ProductPageSteps;
 import steps.SearchPageSteps;
 
 public abstract class BaseTest {
@@ -13,6 +14,7 @@ public abstract class BaseTest {
     MainPageSteps mainWebSitePage;
     SearchPageSteps searchResultPage;
     CartPageSteps cartPage;
+    ProductPageSteps productPageSteps;
 
     @DataProvider
     public static Object[][] dataForSearching() {
@@ -48,6 +50,7 @@ public abstract class BaseTest {
         mainWebSitePage = new MainPageSteps(driver);
         searchResultPage = new SearchPageSteps(driver);
         cartPage = new CartPageSteps(driver);
+        productPageSteps = new ProductPageSteps(driver);
     }
 
     @AfterTest
