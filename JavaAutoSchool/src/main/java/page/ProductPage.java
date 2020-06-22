@@ -12,7 +12,6 @@ public interface ProductPage extends WebPage, WithHeader {
     @FindBy(".//select[@id='group_1']")
     HtmlElement sizeDropDownMenu();
 
-  //  @FindBy(".//select[@id='group_1']/option[@title='M']")
     @FindBy("//select[@id='group_1']/option[text()='{{ text }}']")
     HtmlElement sizeMInDropDownMenu(@Param("text") String text);
 
@@ -28,10 +27,4 @@ public interface ProductPage extends WebPage, WithHeader {
     @FindBy("//div[@id='layer_cart']")
     AddingToCartPopup layerCart();
 
-
-
-//    public interface MainPage extends WebPage {
-//        @FindBy("//div[text()='{{ text }}']/input")
-//        AtlasWebElement input(@Param("text") String text);
-//    }
 }

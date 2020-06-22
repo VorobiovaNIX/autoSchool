@@ -13,4 +13,7 @@ public interface ProductInCart extends AtlasWebElement<ProductInCart> {
 
     @FindBy(".//i[@class='icon-trash']")
     HtmlElement deleteIcon();
+
+    @FindBy(".//input[contains(@class,'cart_quantity_input')]")
+    HtmlElement quantity();
 }

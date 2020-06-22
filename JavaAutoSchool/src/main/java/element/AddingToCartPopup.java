@@ -20,7 +20,4 @@ public interface AddingToCartPopup extends AtlasWebElement<AddingToCartPopup> {
     @FindBy(".//span[@id='layer_cart_product_price']")
     HtmlElement totalPrice();
 
-
-
-
 }

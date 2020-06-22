@@ -26,37 +26,36 @@ public class CheckWebSiteTest extends BaseTest {
 
     @Test(priority = 4)
     public void checkThatAllDataMatchOnPopup() {
-        mainWebSitePage.open().makeSearch("Printed dress").openProductPage();
 
+        SearchPageSteps firstProduct = mainWebSitePage.open().makeSearch("Printed dress");
+        String firstProductName = firstProduct.getNameProduct(1);
+        String firstProductPrice = firstProduct.getPriceProduct(1);
+
+        firstProduct.openProductPage();
         productPageSteps.selectSizeOfProduct("M")
                 .selectQuantityOfProduct("10")
                 .clickOnAddToCart()
                 .checkThatSizeAndTotalPriceAreCorrectOnPopup("10", "M");
 
-        mainWebSitePage.open().makeSearch("blouse").openProductPage();
+        SearchPageSteps secondProduct = mainWebSitePage.open().makeSearch("blouse");
+        String secondProductName = secondProduct.getNameProduct(1);
+        String secondProductPrice = secondProduct.getPriceProduct(1);
 
+        secondProduct.openProductPage();
         productPageSteps.selectSizeOfProduct("S")
                 .clickOnAddToCart()
                 .checkThatSizeAndTotalPriceAreCorrectOnPopup("1", "S");
 
         productPageSteps.openShoppingCard();
 
-        SearchPageSteps firstProduct = mainWebSitePage.open().makeSearch("Printed dress");
-        String firstProductName = firstProduct.getNameProduct(1);
-        String firstProductPrice = firstProduct.getPriceProduct(1);
-
-
-        SearchPageSteps secondProduct = mainWebSitePage.open().makeSearch("blouse");
-        String secondProductName = secondProduct.getNameProduct(1);
-        String secondProductPrice = secondProduct.getPriceProduct(1);
-
         cartPage.checkPriceAndNameOnCartPage(1, firstProductName, firstProductPrice);
 
         cartPage.checkPriceAndNameOnCartPage(2, secondProductName, secondProductPrice);
 
-//        cartPage.removeProductOnShoppingCart(1)
-//                .checkThatProductHasBeenRemoved(1)
-//                .checkThatOtherProductIsDisplayed(2);
+        int amountOfProductsBeforeRemoving = cartPage.getAmountOfProductsInCart();
+        cartPage.removeProductOnShoppingCart(1).checkThatOtherProductIsDisplayed(2);
+
+        cartPage.checkThatProductHasBeenRemoved(amountOfProductsBeforeRemoving);
 
 
     }
