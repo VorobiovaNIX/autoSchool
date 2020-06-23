@@ -1,77 +1,101 @@
-import com.jayway.restassured.response.Response;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.builder.ResponseSpecBuilder;
+import com.jayway.restassured.specification.ResponseSpecification;
 import org.json.JSONException;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.jayway.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertEquals;
 
 
 public class ApiAutoRiaTest {
 
+    ResponseSpecBuilder spec;
+    ResponseSpecification responseSpec;
+
+    @Before
+    public void setup() {
+        RestAssured.baseURI = "https://auto.ria.com";
+        spec = new ResponseSpecBuilder();
+        spec.expectStatusCode(200);
+        spec.expectContentType("text/html");
+        spec.expectHeader("Content-Encoding", "gzip");
+        responseSpec = spec.build();
+    }
+
     @Test
     public void testMitsubishi() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_mitsubishi_lancer_21990745.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().log().all().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_mitsubishi_lancer_21990745.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
 
     @Test
     public void testToyota() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_toyota_camry_22101863.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_toyota_camry_22101863.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
 
     @Test
     public void testBmw() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_bmw_520_21996828.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_bmw_520_21996828.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
 
     @Test
     public void testNissanLeaf() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_nissan_leaf_22104675.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_nissan_leaf_22104675.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
 
     @Test
     public void testNissanLeaf2() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_nissan_leaf_22104647.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_nissan_leaf_22104647.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
-
 
     @Test
     public void testMercedesBenz() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_mercedes_benz_e_220_21994701.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_mercedes_benz_e_220_21994701.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
 
     @Test
     public void testLexusNx() throws JSONException {
-        Response resp = given().header("User-Agent", "Jmeter")
-                .get("https://auto.ria.com/auto_lexus_nx_200_22083607.html");
-        assertEquals(200, resp.getStatusCode());
-        assertThat(resp.header("Content-Type"), containsString("text/html"));
-        assertThat(resp.header("Content-Encoding"), containsString("gzip"));
+        given().header("User-Agent", "Jmeter")
+                .when()
+                .get("/auto_lexus_nx_200_22083607.html")
+                .then()
+                .log().all()
+                .spec(responseSpec);
     }
 
+    @After
+    public void tearDown() {
+        RestAssured.reset();
+    }
 }
